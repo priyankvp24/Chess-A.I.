@@ -9,61 +9,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "CHESS/main.cpp"
-            timestampString = "585289558.208132"
+            filePath = "CHESS/Hueristic.cpp"
+            timestampString = "587596381.106668"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "39"
-            endingLineNumber = "39"
-            landmarkName = "main(int argc, const char * argv[])"
-            landmarkType = "9">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "CHESS/Pieces.cpp"
-            timestampString = "585353888.325743"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "879"
-            endingLineNumber = "879"
-            landmarkName = "possibleMovement()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "CHESS/main.cpp"
-            timestampString = "585289558.209013"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "33"
-            endingLineNumber = "33"
-            landmarkName = "main(int argc, const char * argv[])"
-            landmarkType = "9">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "CHESS/Pieces.cpp"
-            timestampString = "585353888.326225"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "923"
-            endingLineNumber = "923"
-            landmarkName = "restrictedMovement(const vector&lt;pair&lt;char, int&gt;&gt; &amp;possibleMoves, map&lt;pair&lt;char, int&gt;, pair&lt;Pieces*, bool&gt;&gt; &amp;edited)"
+            startingLineNumber = "825"
+            endingLineNumber = "825"
+            landmarkName = "Hueristic :: Min (map&lt;pair&lt;char, int&gt;, pair&lt;Pieces*, bool&gt;&gt; &amp;board, int depth, int initialHeight, int beta, int alpha, Hueristic &amp;H)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

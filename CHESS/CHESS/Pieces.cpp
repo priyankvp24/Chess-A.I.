@@ -6,12 +6,13 @@
 //  Copyright © 2019 Priyank Patel. All rights reserved.
 //
 
-#include "Pieces.hpp"
+#include "Pieces_header.hpp"
 #include <stdio.h>
 #include <iostream>
 #include <string>
 #include <vector>
 using namespace std;
+
 
 //returns a piece's letter
 char Pieces::get_letter() {
@@ -43,8 +44,13 @@ string Pieces::get_color() {
     return color;
 }
 
+//returns a piece's filename
+string Pieces :: get_filename() {
+    return fileName;
+}
+
 //returns a piece's sprite
-sf::Sprite Pieces::get_sprite() {
+sf::Sprite& Pieces::get_sprite() {
     return image;
 }
 
@@ -281,8 +287,19 @@ public:
         
     }
     
-   
+    double findPositionReEval() override {
+        
+        if (get_color() == "black") {
+            return pawnPositionEval[get_number()-1][get_letter()-65];
+        }
+        
+        else {
+            return (-1 * pawnPositionEval[7-(get_number()-1)][get_letter()-65]);
+        }
+        
+    }
     
+   
 };
 
 //the sub-class rook
@@ -306,12 +323,18 @@ public:
             --goingUp;
         }
         
+        pair<char, int> North('#', 99);
+        possibilities.push_back(North);
+        
         char goingRight = get_letter() + 1;
         while(goingRight != 'I') {
             pair<char, int> option3(goingRight, get_number());
             possibilities.push_back(option3);
             ++goingRight;
         }
+        
+        pair<char, int> East('#', 99);
+        possibilities.push_back(East);
         
         int goingDown = get_number() + 1;
         while(goingDown != 9) {
@@ -320,12 +343,18 @@ public:
             ++goingDown;
         }
         
+        pair<char, int> South('#', 99);
+        possibilities.push_back(South);
+        
         char goingLeft = get_letter() - 1;
         while(goingLeft != '@') {
             pair<char, int> option4(goingLeft, get_number());
             possibilities.push_back(option4);
             --goingLeft;
         }
+        
+        pair<char, int> West('#', 99);
+        possibilities.push_back(West);
         
         return possibilities;
     }
@@ -339,7 +368,7 @@ public:
         int i = 0;
         
     
-        while (possibleMoves[i].first == get_letter()) {
+        while (possibleMoves[i].first != '#') {
             
             if (edited[possibleMoves[i]].second) {
                 
@@ -353,7 +382,7 @@ public:
                     finalCut.push_back(possibleMoves[i]);
                 }
                 
-                while (possibleMoves[i].first == get_letter()) {
+                while (possibleMoves[i].first != '#') {
                     ++i;
                 }
                 
@@ -366,8 +395,10 @@ public:
             
         }
         
+        ++i;
+        
 
-        while (possibleMoves[i].second == get_number()) {
+        while (possibleMoves[i].second != 99) {
             
             if (edited[possibleMoves[i]].second) {
                 
@@ -381,7 +412,7 @@ public:
                     finalCut.push_back(possibleMoves[i]);
                 }
                 
-                while (possibleMoves[i].second == get_number()) {
+                while (possibleMoves[i].second != 99) {
                     ++i;
                 }
             
@@ -394,8 +425,10 @@ public:
 
             
         }
+        
+        ++i;
 
-        while (possibleMoves[i].first == get_letter()) {
+        while (possibleMoves[i].first != '#') {
             
             if (edited[possibleMoves[i]].second) {
                 
@@ -407,7 +440,7 @@ public:
                     finalCut.push_back(possibleMoves[i]);
                 }
                 
-                while (possibleMoves[i].first == get_letter()) {
+                while (possibleMoves[i].first != '#') {
                     ++i;
                 }
                 
@@ -421,8 +454,10 @@ public:
             
         }
         
+        ++i;
+        
 
-        while (i != possibleMoves.size()) {
+        while (possibleMoves[i].first != '#') {
             
             if (edited[possibleMoves[i]].second) {
                 if (get_color() == "white" && edited[possibleMoves[i]].first->get_color() == "black") {
@@ -432,7 +467,7 @@ public:
                 if (get_color() == "black" && edited[possibleMoves[i]].first->get_color() == "white") {
                     finalCut.push_back(possibleMoves[i]);
                 }
-                while (i != possibleMoves.size()) {
+                while (possibleMoves[i].first != '#') {
                     ++i;
                 }
             }
@@ -447,6 +482,16 @@ public:
         
         return finalCut;
         
+    }
+    
+    double findPositionReEval() override {
+        if (get_color() == "black") {
+            return rookPositionEval[get_number()-1][get_letter()-65];
+        }
+        
+        else {
+            return (-1 * rookPositionEval[7-(get_number()-1)][get_letter()-65]);
+        }
     }
     
 };
@@ -591,6 +636,16 @@ public:
     
     }
     
+    double findPositionReEval() override {
+        if (get_color() == "black") {
+            return bishopPositionEval[get_number()-1][get_letter()-65];
+        }
+        
+        else {
+            return (-1 * bishopPositionEval[7-(get_number()-1)][get_letter()-65]);
+        }
+    }
+    
 };
 
 //the sub-class knight
@@ -609,82 +664,50 @@ public:
         
         //upRight
         if (get_letter() != 'H' && get_number() > 2) {
-            
-            char let = get_letter() + 1;
-            int num = get_number() - 2;
-            pair<char, int> upRight(let, num);
+            pair<char, int> upRight(get_letter() + 1, get_number() - 2);
             possibilities.push_back(upRight);
-            
         }
         
         //upLeft
         if (get_letter() != 'A' && get_number() > 2) {
-            
-            char let = get_letter() - 1;
-            int num = get_number() - 2;
-            pair<char, int> upLeft(let, num);
+            pair<char, int> upLeft(get_letter() - 1, get_number() - 2);
             possibilities.push_back(upLeft);
-            
         }
         
         //leftUp
         if (get_letter() > 66 && get_number() > 1) {
-            
-            char let = get_letter() - 2;
-            int num = get_number() - 1;
-            pair<char, int> leftUp(let, num);
+            pair<char, int> leftUp(get_letter() - 2, get_number() - 1);
             possibilities.push_back(leftUp);
-            
         }
         
         //leftDown
         if (get_letter() > 66 && get_number() < 8) {
-            
-            char let = get_letter() - 2;
-            int num = get_number() + 1;
-            pair<char, int> leftDown(let, num);
+            pair<char, int> leftDown(get_letter() - 2, get_number() + 1);
             possibilities.push_back(leftDown);
-            
         }
         
         //rightUp
         if (get_letter() < 71 && get_number() > 1) {
-            
-            char let = get_letter() + 2;
-            int num = get_number() - 1;
-            pair<char, int> rightUp(let, num);
+            pair<char, int> rightUp(get_letter() + 2, get_number() - 1);
             possibilities.push_back(rightUp);
-            
         }
         
         //rightDown
         if (get_letter() < 71 && get_number() < 8) {
-            
-            char let = get_letter() + 2;
-            int num = get_number() + 1;
-            pair<char, int> rightDown(let, num);
+            pair<char, int> rightDown(get_letter() + 2, get_number() + 1);
             possibilities.push_back(rightDown);
-            
         }
             
         //downRight
         if (get_letter() != 'H' && get_number() < 7) {
-            
-            char let = get_letter() + 1;
-            int num = get_number() + 2;
-            pair<char, int> downRight(let, num);
+            pair<char, int> downRight(get_letter() + 1, get_number() + 2);
             possibilities.push_back(downRight);
-            
         }
         
         //downLeft
         if (get_letter() != 'A' && get_number() < 7) {
-            
-            char let = get_letter() - 1;
-            int num = get_number() + 2;
-            pair<char, int> downLeft(let, num);
+            pair<char, int> downLeft(get_letter() - 1, get_number() + 2);
             possibilities.push_back(downLeft);
-            
         }
         
         return possibilities;
@@ -710,6 +733,16 @@ public:
         
         return finalCut;
         
+    }
+    
+    double findPositionReEval() override{
+        if (get_color() == "black") {
+            return knightPositionEval[get_number()-1][get_letter()-65];
+        }
+        
+        else {
+            return (-1 * knightPositionEval[7-(get_number()-1)][get_letter()-65]);
+        }
     }
 
     
@@ -924,6 +957,16 @@ public:
         
     }
     
+    double findPositionReEval() override {
+        if (get_color() == "black") {
+            return queenPositionEval[get_number()-1][get_letter()-65];
+        }
+        
+        else {
+            return (-1 * queenPositionEval[7-(get_number()-1)][get_letter()-65]);
+        }
+    }
+    
     
 };
 
@@ -1025,6 +1068,16 @@ public:
         
         return finalCut;
         
+    }
+    
+    double findPositionReEval() override {
+        if (get_color() == "black") {
+            return kingPositionEval[get_number()-1][get_letter()-65];
+        }
+        
+        else {
+            return (-1 * kingPositionEval[7-(get_number()-1)][get_letter()-65]);
+        }
     }
     
    

@@ -7,16 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9908498922DCEE860050E166 /* libsfml-audio.2.5.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9903A08822AC61A7004DE432 /* libsfml-audio.2.5.1.dylib */; };
-		9908498A22DCEE890050E166 /* libsfml-graphics.2.5.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9903A08C22AC61A7004DE432 /* libsfml-graphics.2.5.1.dylib */; };
-		9908498B22DCEE8A0050E166 /* libsfml-network.2.5.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9903A08922AC61A7004DE432 /* libsfml-network.2.5.1.dylib */; };
-		9908498C22DCEE8C0050E166 /* libsfml-system.2.5.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9903A08A22AC61A7004DE432 /* libsfml-system.2.5.1.dylib */; };
-		9908498D22DCEE8E0050E166 /* libsfml-window.2.5.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9903A08B22AC61A7004DE432 /* libsfml-window.2.5.1.dylib */; };
 		9908499A22DCF0D50050E166 /* Graphics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 995B007922ADFAD300CFC4E6 /* Graphics.cpp */; };
 		990849B522DFCC5F0050E166 /* Board.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 99D90F8322BD54D9007915C7 /* Board.cpp */; };
-		9933362222DFCEC700CC5D84 /* Game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9933362022DFCEC700CC5D84 /* Game.cpp */; };
-		99CF652022E2B93C00D922BE /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9903A08022AC6020004DE432 /* main.cpp */; };
+		99542D9723014FD600D040A2 /* Game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9933362022DFCEC700CC5D84 /* Game.cpp */; };
+		99542D9823014FF800D040A2 /* Hueristic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 99FC83B522F6038C000F10EB /* Hueristic.cpp */; };
+		99542D9A2301500200D040A2 /* libsfml-audio.2.5.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9903A08822AC61A7004DE432 /* libsfml-audio.2.5.1.dylib */; };
+		99542D9B2301500400D040A2 /* libsfml-graphics.2.5.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9903A08C22AC61A7004DE432 /* libsfml-graphics.2.5.1.dylib */; };
+		99542D9C2301500700D040A2 /* libsfml-network.2.5.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9903A08922AC61A7004DE432 /* libsfml-network.2.5.1.dylib */; };
+		99542D9D2301500900D040A2 /* libsfml-system.2.5.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9903A08A22AC61A7004DE432 /* libsfml-system.2.5.1.dylib */; };
+		99542D9E2301500B00D040A2 /* libsfml-window.2.5.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9903A08B22AC61A7004DE432 /* libsfml-window.2.5.1.dylib */; };
+		99542DAD2303991A00D040A2 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9903A08022AC6020004DE432 /* main.cpp */; };
 		99D90F9222C08F10007915C7 /* Pieces.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9912643122ADFE5C00956CFD /* Pieces.cpp */; };
+		99FFC2882304A56C00BCC1EE /* AI_engine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 99542DAA230384A500D040A2 /* AI_engine.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -32,7 +34,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		9903A07D22AC6020004DE432 /* CHESS */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.objfile"; includeInIndex = 0; path = CHESS; sourceTree = BUILT_PRODUCTS_DIR; };
+		9903A07D22AC6020004DE432 /* CHESS */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = CHESS; sourceTree = BUILT_PRODUCTS_DIR; };
 		9903A08022AC6020004DE432 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		9903A08822AC61A7004DE432 /* libsfml-audio.2.5.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libsfml-audio.2.5.1.dylib"; path = "ExternalLibrary/SFML/lib/libsfml-audio.2.5.1.dylib"; sourceTree = "<group>"; };
 		9903A08922AC61A7004DE432 /* libsfml-network.2.5.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libsfml-network.2.5.1.dylib"; path = "ExternalLibrary/SFML/lib/libsfml-network.2.5.1.dylib"; sourceTree = "<group>"; };
@@ -54,15 +56,20 @@
 		9912643122ADFE5C00956CFD /* Pieces.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Pieces.cpp; sourceTree = "<group>"; };
 		9933362022DFCEC700CC5D84 /* Game.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Game.cpp; sourceTree = "<group>"; };
 		9933362122DFCEC700CC5D84 /* Game.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Game.hpp; sourceTree = "<group>"; };
+		99381E5722F50232006F665B /* Pieces_header.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Pieces_header.hpp; sourceTree = "<group>"; };
+		99542DAA230384A500D040A2 /* AI_engine.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AI_engine.cpp; sourceTree = "<group>"; };
+		99542DAB230384A500D040A2 /* AI_engine.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AI_engine.hpp; sourceTree = "<group>"; };
 		995B007422ADDD7500CFC4E6 /* wooden.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = wooden.jpg; sourceTree = "<group>"; };
 		995B007822ADF43300CFC4E6 /* ESCAMPURENAK.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ESCAMPURENAK.ttf; sourceTree = "<group>"; };
 		995B007922ADFAD300CFC4E6 /* Graphics.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Graphics.cpp; sourceTree = "<group>"; };
 		995B007A22ADFAD300CFC4E6 /* Graphics.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Graphics.hpp; sourceTree = "<group>"; };
 		99C2780822B324C30075AF5C /* PiecesTest.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = PiecesTest.cpp; sourceTree = "<group>"; };
-		99C2781822B376B70075AF5C /* Pieces.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = Pieces.hpp; path = ../../../.Trash/Pieces.hpp; sourceTree = "<group>"; };
+		99C7F14C22FDDE4600F09C74 /* HueristicTest.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = HueristicTest.cpp; sourceTree = "<group>"; };
 		99D90F8322BD54D9007915C7 /* Board.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Board.cpp; sourceTree = "<group>"; };
 		99D90F8422BD54D9007915C7 /* Board.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Board.hpp; sourceTree = "<group>"; };
 		99D90F8622BFF395007915C7 /* BoardTest.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = BoardTest.cpp; sourceTree = "<group>"; };
+		99FC83B522F6038C000F10EB /* Hueristic.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Hueristic.cpp; sourceTree = "<group>"; };
+		99FC83B622F6038C000F10EB /* Hueristic.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Hueristic.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,11 +77,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9908498B22DCEE8A0050E166 /* libsfml-network.2.5.1.dylib in Frameworks */,
-				9908498C22DCEE8C0050E166 /* libsfml-system.2.5.1.dylib in Frameworks */,
-				9908498D22DCEE8E0050E166 /* libsfml-window.2.5.1.dylib in Frameworks */,
-				9908498922DCEE860050E166 /* libsfml-audio.2.5.1.dylib in Frameworks */,
-				9908498A22DCEE890050E166 /* libsfml-graphics.2.5.1.dylib in Frameworks */,
+				99542D9C2301500700D040A2 /* libsfml-network.2.5.1.dylib in Frameworks */,
+				99542D9D2301500900D040A2 /* libsfml-system.2.5.1.dylib in Frameworks */,
+				99542D9E2301500B00D040A2 /* libsfml-window.2.5.1.dylib in Frameworks */,
+				99542D9A2301500200D040A2 /* libsfml-audio.2.5.1.dylib in Frameworks */,
+				99542D9B2301500400D040A2 /* libsfml-graphics.2.5.1.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -117,12 +124,17 @@
 				995B007422ADDD7500CFC4E6 /* wooden.jpg */,
 				99C2780822B324C30075AF5C /* PiecesTest.cpp */,
 				99D90F8622BFF395007915C7 /* BoardTest.cpp */,
+				99C7F14C22FDDE4600F09C74 /* HueristicTest.cpp */,
 				9933362022DFCEC700CC5D84 /* Game.cpp */,
 				9933362122DFCEC700CC5D84 /* Game.hpp */,
+				99542DAA230384A500D040A2 /* AI_engine.cpp */,
+				99542DAB230384A500D040A2 /* AI_engine.hpp */,
 				99D90F8322BD54D9007915C7 /* Board.cpp */,
 				99D90F8422BD54D9007915C7 /* Board.hpp */,
+				99FC83B522F6038C000F10EB /* Hueristic.cpp */,
+				99FC83B622F6038C000F10EB /* Hueristic.hpp */,
 				9912643122ADFE5C00956CFD /* Pieces.cpp */,
-				99C2781822B376B70075AF5C /* Pieces.hpp */,
+				99381E5722F50232006F665B /* Pieces_header.hpp */,
 				995B007922ADFAD300CFC4E6 /* Graphics.cpp */,
 				995B007A22ADFAD300CFC4E6 /* Graphics.hpp */,
 				9903A08022AC6020004DE432 /* main.cpp */,
@@ -198,11 +210,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				99542D9823014FF800D040A2 /* Hueristic.cpp in Sources */,
 				9908499A22DCF0D50050E166 /* Graphics.cpp in Sources */,
 				99D90F9222C08F10007915C7 /* Pieces.cpp in Sources */,
-				99CF652022E2B93C00D922BE /* main.cpp in Sources */,
 				990849B522DFCC5F0050E166 /* Board.cpp in Sources */,
-				9933362222DFCEC700CC5D84 /* Game.cpp in Sources */,
+				99542DAD2303991A00D040A2 /* main.cpp in Sources */,
+				99FFC2882304A56C00BCC1EE /* AI_engine.cpp in Sources */,
+				99542D9723014FD600D040A2 /* Game.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -12,6 +12,7 @@
 #include <iostream>
 #include <string>
 #include <SFML/Graphics.hpp>
+#pragma once
 using namespace std;
 
 

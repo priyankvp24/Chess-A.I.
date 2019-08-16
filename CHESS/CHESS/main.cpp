@@ -11,85 +11,36 @@
 #include "Game.hpp"
 using namespace std;
 
-int main(int argc, const char * argv[])
+int main(int argc, char** argv)
 {
     
     Game chess;
     
-    // insert code here...
-    sf::RenderWindow window(sf::VideoMode(2560, 1920), "CHESS");
-    map<pair<char, int>, pair<Pieces*, bool>> initialBoard;
-    createBoard(initialBoard);
+    if (argc == 2) {
+        
+        string playerMode = argv[1];
+        if (playerMode == "playerVplayer") {
+            chess.playGame(playerMode, "N/A");
+        }
+    }
     
-    int turnTracker = 0;
-    
-    while (window.isOpen())
-    {
-    
+    else if (argc == 3) {
         
-        //if turnTracker is even, ask white
-        if (turnTracker % 2 == 0 && turnTracker != 0) {
-            
-            editBoard("white", initialBoard);
-            
+        string cpuMode = argv[1];
+        string playerColor = argv[2];
+        string humanColor = "black";
+        string altHumanColor = "white";
+        
+        if (cpuMode == "playerVcpu" &&
+            (playerColor == humanColor || playerColor == altHumanColor)) {
+            chess.playGame(cpuMode, playerColor);
         }
-        
-        if (turnTracker % 2 != 0) {
-            
-            editBoard("black", initialBoard);
-            
-        }
-        
-        ++turnTracker;
-        
-        sf::Event event;
-        
-        //handles events
-        while (window.pollEvent(event))
-        {
-            
-            switch (event.type)
-            {
-                case sf::Event::Closed:
-                    window.close();
-                    
-                
-            }
-        }
-        
-        //update the game
-        window.clear();
-        
-        //draw objects here
-        
-        //*****wooden desk texture/creation using sprites*****
-        chess.setUpBoard(window);
-        
-        graphicsBoard(initialBoard, window);
-        
-        if (turnTracker % 2 != 0) {
-            chess.isKingDead(window, initialBoard, "black", "white");
-        }
-        
-        if (turnTracker % 2 == 0) {
-            chess.isKingDead(window, initialBoard, "white", "black");
-        }
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-    
-        
-        window.display();
         
     }
+    
+    else {
+        return 0;
+    }
+    
+    
 }

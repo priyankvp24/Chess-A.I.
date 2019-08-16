@@ -11,18 +11,18 @@
 
 #include <stdio.h>
 #include "Board.hpp"
+#pragma once
 
 #endif /* Game_hpp */
+#include "AI_engine.hpp"
 
 
 class Game {
     
 public:
     
-    void playGame();
+    void playGame(string gameMode, string playerColor);
     void setUpBoard(sf::RenderWindow &window);
     void isKingDead(sf::RenderWindow &window, const map<pair<char, int>, pair<Pieces*, bool>> &board, string checkColor, string otherColor);
-    
-private:
     
 };

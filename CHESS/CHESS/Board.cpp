@@ -8,11 +8,6 @@
 
 #include "Board.hpp"
 
-//converts a number that is a char to an actually int my manipulating ASCII code
-int charToInt(const char &x) {
-    return (x-48);
-}
-
 //linear search of a vector seeing if move appears in searching
 //returns a true bool if move is in searching, returns false otherwise
 bool searchVec(vector<pair<char, int>> &searching, pair<char, int> &move) {
@@ -29,28 +24,39 @@ bool searchVec(vector<pair<char, int>> &searching, pair<char, int> &move) {
     
 }
 
+//converts a number that is a char to an int by manipulating ASCII code
+int charToInt2(const char &c) {
+    return (c-48);
+}
+
+
 //creates the intial state of the board using a map class
-void createBoard(map<pair<char, int>, pair<Pieces*, bool>> &init) {
+void createBoard(map<pair<char, int>, pair<Pieces*, bool>> &init, Hueristic &order) {
+
     
     for(int i = 0; i < 8; ++i) {
         
         Pieces* whitePawn = PieceFactory("Pawn", "white", 65 + i, 2, "Wpawn.png");
+        order.addPiece("white", whitePawn, order);
         pair<char, int> pawnInfo(whitePawn->get_letter(), whitePawn->get_number());
         pair<Pieces*, bool> pawnInfo2(whitePawn, true);
         init[pawnInfo] = pawnInfo2;
         
         Pieces* blackPawn = PieceFactory("Pawn", "black", 65 + i, 7, "Bpawn.png");
+        order.addPiece("black", blackPawn, order);
         pair<char, int> otherInfo(blackPawn->get_letter(), blackPawn->get_number());
         pair<Pieces*, bool> otherInfo2(blackPawn, true);
         init[otherInfo] = otherInfo2;
         
         if (i == 0 || i == 7) {
             Pieces* whiteRook = PieceFactory("Rook", "white" , 65 + i, 1, "Wrook.png");
+            order.addPiece("white", whiteRook, order);
             pair<char, int> rookInfo(whiteRook->get_letter(), whiteRook->get_number());
             pair<Pieces*, bool> rookInfo2(whiteRook, true);
             init[rookInfo] = rookInfo2;
             
             Pieces* blackRook = PieceFactory("Rook", "black" , 65 + i, 8, "Brook.png");
+            order.addPiece("black", blackRook, order);
             pair<char, int> otherInfo(blackRook->get_letter(), blackRook->get_number());
             pair<Pieces*, bool> otherInfo2(blackRook, true);
             init[otherInfo] = otherInfo2;
@@ -58,11 +64,13 @@ void createBoard(map<pair<char, int>, pair<Pieces*, bool>> &init) {
         
         if (i == 1 || i == 6) {
             Pieces* whiteKnight = PieceFactory("Knight", "white" , 65 + i, 1, "Wknight.png");
+            order.addPiece("white", whiteKnight, order);
             pair<char, int> knightInfo(whiteKnight->get_letter(), whiteKnight->get_number());
             pair<Pieces*, bool> knightInfo2(whiteKnight, true);
             init[knightInfo] = knightInfo2;
             
             Pieces* blackKnight = PieceFactory("Knight", "black" , 65 + i, 8, "Bknight.png");
+            order.addPiece("black", blackKnight, order);
             pair<char, int> otherInfo(blackKnight->get_letter(), blackKnight->get_number());
             pair<Pieces*, bool> otherInfo2(blackKnight, true);
             init[otherInfo] = otherInfo2;
@@ -71,11 +79,13 @@ void createBoard(map<pair<char, int>, pair<Pieces*, bool>> &init) {
         
         if (i == 2 || i == 5) {
             Pieces* whiteBishop = PieceFactory("Bishop", "white" , 65 + i, 1, "Wbishop.png");
+            order.addPiece("white", whiteBishop, order);
             pair<char, int> bishopInfo(whiteBishop->get_letter(), whiteBishop->get_number());
             pair<Pieces*, bool> bishopInfo2(whiteBishop, true);
             init[bishopInfo] = bishopInfo2;
             
             Pieces* blackBishop = PieceFactory("Bishop", "black" , 65 + i, 8, "Bbishop.png");
+            order.addPiece("black", blackBishop, order);
             pair<char, int> otherInfo(blackBishop->get_letter(), blackBishop->get_number());
             pair<Pieces*, bool> otherInfo2(blackBishop, true);
             init[otherInfo] = otherInfo2;
@@ -83,11 +93,13 @@ void createBoard(map<pair<char, int>, pair<Pieces*, bool>> &init) {
         
         if (i == 4) {
             Pieces* whiteQueen = PieceFactory("Queen", "white", 'E', 1, "Wqueen.png");
+            order.addPiece("white", whiteQueen, order);
             pair<char, int> queenInfo(whiteQueen->get_letter(), whiteQueen->get_number());
             pair<Pieces*, bool> queenInfo2(whiteQueen, true);
             init[queenInfo] = queenInfo2;
             
             Pieces* blackQueen = PieceFactory("Queen", "black", 'E', 8, "Bqueen.png");
+            order.addPiece("black", blackQueen, order);
             pair<char, int> otherInfo(blackQueen->get_letter(), blackQueen->get_number());
             pair<Pieces*, bool> otherInfo2(blackQueen, true);
             init[otherInfo] = otherInfo2;
@@ -95,11 +107,13 @@ void createBoard(map<pair<char, int>, pair<Pieces*, bool>> &init) {
             
         if (i == 3) {
             Pieces* whiteKing = PieceFactory("King", "white", 'D', 1, "Wking.png");
+            order.addPiece("white", whiteKing, order);
             pair<char, int> kingInfo(whiteKing->get_letter(), whiteKing->get_number());
             pair<Pieces*, bool> kingInfo2(whiteKing, true);
             init[kingInfo] = kingInfo2;
             
             Pieces* blackKing = PieceFactory("King", "black", 'D', 8, "Bking.png");
+            order.addPiece("black", blackKing, order);
             pair<char, int> otherInfo(blackKing->get_letter(), blackKing->get_number());
             pair<Pieces*, bool> otherInfo2(blackKing, true);
             init[otherInfo] = otherInfo2;
@@ -118,7 +132,7 @@ void createBoard(map<pair<char, int>, pair<Pieces*, bool>> &init) {
 
 //uses restrictedMovement function to ask the user what they want to change
 //then verifying that their move is valid
-void editBoard (string color, map<pair<char, int>, pair<Pieces*, bool>> &edited) {
+void editBoard (string color, map<pair<char, int>, pair<Pieces*, bool>> &edited, Hueristic &order) {
     
     cout << "Which pieces would you like to move " << color << "?" << endl;
     
@@ -129,7 +143,7 @@ void editBoard (string color, map<pair<char, int>, pair<Pieces*, bool>> &edited)
     while (!validPiece) {
         
         cin >> coordinate;
-        pair<char, int> piece(coordinate[0], charToInt(coordinate[1]));
+        pair<char, int> piece(coordinate[0], charToInt2(coordinate[1]));
         
         if (!edited[piece].second) {
             cout << "There is no piece to move at that spot! It is EMPTY" << endl;
@@ -144,7 +158,7 @@ void editBoard (string color, map<pair<char, int>, pair<Pieces*, bool>> &edited)
             restrictedMovement((edited[piece].first)->possibleMovement(), edited);
             
             if (options.size() == 0) {
-                cout << "That piece can't even move anywhere, picka diffrent one" << endl;
+                cout << "That piece can't even move anywhere, pick a diffrent one" << endl;
             }
             
             else {
@@ -153,7 +167,7 @@ void editBoard (string color, map<pair<char, int>, pair<Pieces*, bool>> &edited)
         }
     }
     
-    pair<char, int> search(coordinate[0], charToInt(coordinate[1]));
+    pair<char, int> search(coordinate[0], charToInt2(coordinate[1]));
     
     cout << "Select an option:" << endl;
     
@@ -178,23 +192,38 @@ void editBoard (string color, map<pair<char, int>, pair<Pieces*, bool>> &edited)
         cout << endl;
         cin >> wantedMovement;
         
-        pair<char, int> move(wantedMovement[0], charToInt(wantedMovement[1]));
-        pair<char, int> search(coordinate[0], charToInt(coordinate[1]));
+        pair<char, int> move(wantedMovement[0], charToInt2(wantedMovement[1]));
+        pair<char, int> search(coordinate[0], charToInt2(coordinate[1]));
         
         if (wantedMovement[0] < 'A' || wantedMovement[0] > 'H' ||
-            charToInt(wantedMovement[1]) < 1 || charToInt(wantedMovement[1]) > 8 ) {
+            charToInt2(wantedMovement[1]) < 1 || charToInt2(wantedMovement[1]) > 8 ) {
             cout << "You can't move off an 8 x 8 board!" << endl;
         }
         
         else if (!searchVec(options, move)) {
+            
             cout << "You can't move there!" << endl;
             
-            if (edited[move].first->get_color() == edited[search].first->get_color()) {
+            if (edited[move].first && edited[move].first->get_color() == edited[search].first->get_color()) {
                 cout << "Friendly fire, you can't do that!" << endl;
             }
+        
         }
         
+        
         else if (edited[move].second == false) {
+            
+            int indexOfPiece = order.findPiece(edited[search].first->get_color(), edited[search].first, order);
+            
+            if (edited[search].first->get_color() == "white") {
+                order.getPiecesList("white")[indexOfPiece]->set_letter(move.first);
+                order.getPiecesList("white")[indexOfPiece]->set_number(move.second);
+            }
+            else if (edited[search].first->get_color() == "black") {
+                order.getPiecesList("black")[indexOfPiece]->set_letter(move.first);
+                order.getPiecesList("black")[indexOfPiece]->set_number(move.second);
+            }
+            
             
             edited[move].first = edited[search].first;
             edited[move].first->set_letter(move.first);
@@ -210,6 +239,18 @@ void editBoard (string color, map<pair<char, int>, pair<Pieces*, bool>> &edited)
         
         else {
             
+            int indexOfPiece = order.findPiece(edited[search].first->get_color(), edited[search].first, order);
+            
+            if (edited[search].first->get_color() == "white") {
+                order.getPiecesList("white")[indexOfPiece]->set_letter(move.first);
+                order.getPiecesList("white")[indexOfPiece]->set_number(move.second);
+            }
+            else if (edited[search].first->get_color() == "black") {
+                order.getPiecesList("black")[indexOfPiece]->set_letter(move.first);
+                order.getPiecesList("black")[indexOfPiece]->set_number(move.second);
+            }
+            
+            order.removePiece(edited[move].first->get_color(), edited[move].first, order);
             delete edited[move].first;
             edited[move].first = edited[search].first;
             edited[move].first->set_letter(move.first);
@@ -222,7 +263,7 @@ void editBoard (string color, map<pair<char, int>, pair<Pieces*, bool>> &edited)
         }
     }
     
-    pair<char, int> move(wantedMovement[0], charToInt(wantedMovement[1]));
+    pair<char, int> move(wantedMovement[0], charToInt2(wantedMovement[1]));
     edited[move].first->update_sprite(xCoordinates(move.first), yCoordinates(move.second));
     
 }

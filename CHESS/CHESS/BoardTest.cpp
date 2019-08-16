@@ -6,30 +6,31 @@
 //  Copyright © 2019 Priyank Patel. All rights reserved.
 //
 
-#include "Board.hpp"
+#include "Game.hpp"
 
 #include <cassert>
 
 
 int main() {
     
+    Hueristic testHueristic;
     map<pair<char, int>, pair<Pieces*, bool>> testB;
-    createBoard(testB);
+    createBoard(testB, testHueristic);
     
     printBoard(testB);
     
-    editBoard("A7", testB);
-    editBoard("A5", testB);
-    editBoard("C7", testB);
-    editBoard("D7", testB);
-    editBoard("E7", testB);
-    editBoard("F7", testB);
-    editBoard("G7", testB);
-    editBoard("H7", testB);
+    editBoard("A7", testB, testHueristic);
+    editBoard("A5", testB, testHueristic);
+    editBoard("C7", testB, testHueristic);
+    editBoard("D7", testB, testHueristic);
+    editBoard("E7", testB, testHueristic);
+    editBoard("F7", testB, testHueristic);
+    editBoard("G7", testB, testHueristic);
+    editBoard("H7", testB, testHueristic);
     
-    editBoard("A8" , testB);
-    editBoard("C8", testB);
-    editBoard("F8", testB);
+    editBoard("A8" , testB, testHueristic);
+    editBoard("C8", testB, testHueristic);
+    editBoard("F8", testB, testHueristic);
     
     
     

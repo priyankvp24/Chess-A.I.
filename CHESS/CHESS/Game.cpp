@@ -9,9 +9,108 @@
 #include "Game.hpp"
 
 
-void Game :: playGame() {
+void Game :: playGame(string gameMode, string playerColor) {
     
+    // insert code here...
+    sf::RenderWindow window(sf::VideoMode(2560, 1920), "CHESS");
+    map<pair<char, int>, pair<Pieces*, bool>> initialBoard;
+    Hueristic ranking;
+
+    if (playerColor == "white") {
+        ranking.set_CPUcolor("black");
+    }
+    else if (playerColor == "black") {
+        ranking.set_CPUcolor("white");
+    }
+    createBoard(initialBoard, ranking);
+    
+    cout << "Welcome to Checkmate" << endl;
+    
+    int turnTracker = 0;
+    
+    while (window.isOpen())
+    {
+            
+        //if turnTracker is even, ask white
+        if (turnTracker % 2 == 0 && turnTracker != 0) {
+                
+            if (gameMode == "playerVplayer") {
+                editBoard("white", initialBoard, ranking);
+            }
+            
+            else if (gameMode == "playerVcpu") {
+                
+                if (playerColor == "white") {
+                    editBoard("white", initialBoard, ranking);
+                }
+                
+                else {
+                    MiniMax(initialBoard, 2, 2, ranking);
+                }
+            }
+        }
+            
+        if (turnTracker % 2 != 0) {
+                
+            if (gameMode == "playerVplayer") {
+                    editBoard("black", initialBoard, ranking);
+            }
+            
+            else if (gameMode == "playerVcpu") {
+                
+                if (playerColor == "black") {
+                    editBoard("black", initialBoard, ranking);
+                }
+                
+                else {
+                    MiniMax(initialBoard, 2, 2, ranking);
+                }
+                
+            }
+        }
+            
+        ++turnTracker;
+    
+        sf::Event event;
+        
+        //handles events
+        while (window.pollEvent(event))
+        {
+            
+            switch (event.type)
+            {
+                case sf::Event::Closed:
+                    window.close();
+                    
+                    
+            }
+        }
+        
+        //update the game
+        window.clear();
+        
+        //draw objects here
+        
+        //*****wooden desk texture/creation using sprites*****
+        setUpBoard(window);
+        
+        graphicsBoard(initialBoard, window);
+        
+        if (turnTracker % 2 != 0) {
+            isKingDead(window, initialBoard, "black", "white");
+        }
+        
+        if (turnTracker % 2 == 0) {
+            isKingDead(window, initialBoard, "white", "black");
+        }
+        
+        window.display();
+ 
+ 
+    }
+        
 }
+
 
 void Game :: setUpBoard(sf::RenderWindow &window) {
     
