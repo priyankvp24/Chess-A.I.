@@ -5,3 +5,5 @@ Checkmate is an application of the skills I've gained in my introductory compute
 # What is does
 Checkmate allows for two playing options. First, two human users can play against each other. Secondly, one human player can play against a CPU. 
 
+![Image of In Game Action]
+(https://octodex.github.com/images/CHESS_IN_GAME.png)
